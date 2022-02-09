@@ -3,17 +3,18 @@ body{
     background-color: #F3F3F3;
 }
 
-@media (max-width: 415px){
+/* @media (max-width: 415px){ */
 
-    header {
-        width: 100vw;
+    .barratopo {
+        width: 100%;
         height: 80px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        background-color: white;
-        filter: drop-shadow(0 0 0.75rem grey);
+        background-color: yellow;
         position: fixed;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: row;
+        filter: drop-shadow(0 0 0.75rem grey);
     }
 
     .logo {
@@ -22,16 +23,7 @@ body{
         left: 22px;
         top: 16px;
         border-radius: 0px;
-        padding-left: 22px;
-    }
-
-    .menu {
-        height: 31px;
-        width: 42px;
-        left: 1.4px;
-        top: 7px;
-        border-radius: 0px;
-        padding-right: 23px;
+        padding-left: 15px;
     }
 
     .chat {
@@ -88,5 +80,39 @@ body{
         font-size: 26px;
         padding-right: 27px;
     }
+    
+    /* --------MENU-------- */
 
-}
+    .botaomenu {
+        width: 30px;
+    }
+
+    .menu {
+        width: 300px;
+        height: 100vh;
+        position: absolute;
+        background-color: red;
+        right: 0px;
+        top:80px;
+    }
+    
+    .opcoes{
+        background-color: blue;
+        position: absolute;
+        width: 100%;
+    }
+
+    h1, h2 {
+        background-color: pink;
+        padding: 5px;
+    }
+
+    .pessoason, .privacidade{
+        background-color: pink;
+        padding: 5px;
+    }
+    #check:checked ~ .menu {
+        transform: translateX(300px)
+    }
+
+/* } */
