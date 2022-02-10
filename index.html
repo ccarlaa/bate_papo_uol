@@ -14,22 +14,38 @@
   </head>
 
   <body>
-
+    <div class="opaco" id="opaco" onclick="fecharMenu()"></div>
 
     <div class="barratopo">
       <img class="logo" src="./image/logo.png">
-        <input type="checkbox" id="check">
-        <label for="check"><img class="botaomenu"src="./image/menu.png"></label>
+      <img class="botaomenu" onclick="abrirMenu()" src="./image/menu.png">
         
-          <div class="menu">
+          <div class="menu" id="menu">
             <div class="opcoes">
-              <h1>blabla</h1>
-              <div class="pessoason">blabla</div>
-              <h2>blabla</h2>
-              <div class="privacidade">blabla</div>
+              <div class="tituloummenu">
+                Escolha um contato
+                para enviar mensagem:
+              </div>
+              <div class="pessoason">
+                <div class="todos">
+                  <img class="icontodos" src="./image/menu.png" />
+                  <div class="nomesmenu">Todos</div>
+                </div>
+              </div>
+              <div class="titulodoismenu">
+                Escolha a visibilidade:
+              </div>
+              <div class="reservado">
+                <ion-icon class="lock-closed-icon" name="lock-closed"></ion-icon>
+                <div class="nomesmenu">Reservadamente</div>
+              </div>  
+              <div class="publico">
+                <ion-icon class="lock-open-icon" name="lock-open"></ion-icon>
+                <div class="nomesmenu">Reservadamente</div>
+              </div>  
             </div>
           </div>
-      </div>
+    </div>
 
     <div class="chat">
       <p>Mensagem</p>
@@ -55,9 +71,10 @@
       <p>Mensagem</p>
     </div>  
     <footer class="rodape">
-        <p class="enviarmsg">Mensagem</p>
-        <ion-icon name="paper-plane-outline"></ion-icon>
+        <div class="enviarmsg">Mensagem</div>
+        <ion-icon class="paper-plane-outline"name="paper-plane-outline"></ion-icon>
     </footer> 
+
   </body>
 
   <script src="script.js"></script>
