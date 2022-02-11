@@ -18,7 +18,7 @@
 
     <div class="barratopo">
       <img class="logo" src="./image/logo.png">
-      <img class="botaomenu" onclick="abrirMenu()" src="./image/menu.png">
+      <ion-icon class="people-menu-icon" name="people" onclick="abrirMenu()"></ion-icon>
         
           <div class="menu" id="menu">
             <div class="opcoes">
@@ -28,21 +28,29 @@
               </div>
               <div class="pessoason">
                 <div class="todos">
-                  <img class="icontodos" src="./image/menu.png" />
-                  <div class="nomesmenu">Todos</div>
+                  <div class="esquerdadomenu">
+                    <ion-icon class="people-icon" name="people"></ion-icon>
+                    <div class="nomesmenu">Todos</div>
+                  </div>
                 </div>
               </div>
               <div class="titulodoismenu">
                 Escolha a visibilidade:
               </div>
               <div class="reservado">
-                <ion-icon class="lock-closed-icon" name="lock-closed"></ion-icon>
-                <div class="nomesmenu">Reservadamente</div>
-              </div>  
+                <div class="esquerdadomenu">
+                  <ion-icon class="lock-closed-icon" name="lock-closed"></ion-icon>
+                  <div class="nomesmenu">Reservadamente</div>
+                  <ion-icon class="checkmark-outline-icon" name="checkmark-outline"></ion-icon>
+                </div>  
+              </div>
               <div class="publico">
-                <ion-icon class="lock-open-icon" name="lock-open"></ion-icon>
-                <div class="nomesmenu">Reservadamente</div>
-              </div>  
+                <div class="esquerdadomenu">
+                  <ion-icon class="lock-open-icon" name="lock-open"></ion-icon>
+                  <div class="nomesmenu">Reservadamente</div>
+                  <ion-icon class="checkmark-outline-icon" name="checkmark-outline"></ion-icon>
+                </div>  
+              </div>
             </div>
           </div>
     </div>
@@ -54,11 +62,12 @@
       </div>
     </div>  
     <footer class="rodape">
-        <input type="text" class="enviarmsg" name="mensagem" placeholder="Digite uma mensagem"> </div>
-        <ion-icon class="paper-plane-outline"name="paper-plane-outline"></ion-icon>
+        <textarea type="text" class="enviarmsg" name="mensagem" placeholder="Digite uma mensagem"></textarea>
+        <ion-icon class="paper-plane-outline" name="paper-plane-outline" onclick="enviarMensagem()"></ion-icon>
     </footer> 
 
   </body>
-
+  
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script src="script.js"></script>

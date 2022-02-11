@@ -1,65 +1,92 @@
-
 // -----BONUS -> FECHAR MENU-------
 
+let opaco
+let menuaberto
+let menufechado
+
 function fecharMenu(){
-    let menufechado = document.getElementById("menu").style.display="none";
-    let opaco = document.getElementById("opaco").style.display="none";
-    document.documentElement.style.overflow = '';
+    menufechado = document.getElementById("menu").style.display="none";
+    opaco = document.getElementById("opaco").style.display="none";
+    document.documentElement.style.overflow = "none";
 }
 
 function abrirMenu() {
-    let menuaberto = document.getElementById("menu").style.display="flex";
-    let opaco = document.getElementById("opaco").style.display="flex";
+    menuaberto = document.getElementById("menu").style.display="flex";
+    opaco = document.getElementById("opaco").style.display="flex";
     document.documentElement.style.overflow = 'hidden';
 }
 
+
 // --------- CARREGAR MSGS NO CHAT ---------
 
-let nome = prompt("Digite seu nome para entrar no chat:");
 let promessa;
-let mensagens
+let mensagens;
 
-while(nome == ""){
-    nome = prompt("Digite seu nome para entrar no chat:");
-}
-
-promessa = axios.get("https://mock-api.driven.com.br/api/v4/uol/messages");
-promessa.then(enviarResposta);
-promessa.catch(deuRuim);
+promessachat = axios.get("https://mock-api.driven.com.br/api/v4/uol/messages");
+promessachat.then(enviarResposta);
 
 function enviarResposta(resposta) {
     let informacoes = resposta.data;
-    console.log(informacoes);
     for(let i = 0 ; i < informacoes.length ; i++){
         if(informacoes[i].type == "status"){
-        console.log(i)
-        mensagens = document.querySelector(".chat")
-        mensagens.innerHTML += `<div class="mensagensrecebidasstatus"><div class="tamanhodamsg"><p class="tempo">(${informacoes[i].time})</p><p class="para"><b>${informacoes[i].from}</b> to <b>${informacoes[i].to}:</b> </p><p class="texto"> ${informacoes[i].text}</p></div></div><div class="espaco"></div>`
-        }else if(informacoes[i].type == "message"){
-        console.log(i)
-        mensagens = document.querySelector(".chat")
-        mensagens.innerHTML += `<div class="mensagensrecebidasmessage"><div class="tamanhodamsg"><p class="tempo">(${informacoes[i].time})</p><p class="para"><b>${informacoes[i].from}</b> to <b>${informacoes[i].to}:</b> </p><p class="texto"> ${informacoes[i].text}</p></div></div><div class="espaco"></div>`
+        mensagens = document.querySelector(".chat");
+        mensagens.innerHTML += `<div class="mensagensrecebidasstatus"><div class="tamanhodamsg"><p class="tempo">(${informacoes[i].time})</p><p class="para"><b>${informacoes[i].from}</b> to <b>${informacoes[i].to}:</b> </p><p class="texto"> ${informacoes[i].text}</p></div></div><div class="espaco"></div>`;
+    }else if(informacoes[i].type == "message"){
+        mensagens = document.querySelector(".chat");
+        mensagens.innerHTML += `<div class="mensagensrecebidasmessage"><div class="tamanhodamsg"><p class="tempo">(${informacoes[i].time})</p><p class="para"><b>${informacoes[i].from}</b> to <b>${informacoes[i].to}:</b> </p><p class="texto"> ${informacoes[i].text}</p></div></div><div class="espaco"></div>`;
         }else{
-        console.log(i)
-        mensagens = document.querySelector(".chat")
-        mensagens.innerHTML += `<div class="mensagensrecebidasreservada"><div class="tamanhodamsg"><p class="tempo">(${informacoes[i].time})</p><p class="para"><b>${informacoes[i].from}</b> to <b>${informacoes[i].to}:</b> </p><p class="texto"> ${informacoes[i].text}</p></div></div><div class="espaco"></div>`
+        mensagens = document.querySelector(".chat");
+        mensagens.innerHTML += `
+        <div class="mensagensrecebidasreservada">
+            <div class="tamanhodamsg">
+            <p class="tempo">(${informacoes[i].time})</p>
+                <p class="para"><b>${informacoes[i].from}</b> to <b>${informacoes[i].to}:</b> </p>
+                <p class="texto"> ${informacoes[i].text}</p>
+            </div>
+        </div><div class="espaco"></div>`;
         }
     }
-    recarregarChat()
-
+    recarregarChat();
 }
 
-
-function recarregarChat(){ //Se as cartas são diferentes 
+function recarregarChat(){
     // setTimeout(() => {
     //     mensagens.innerHTML="";
     //     promessa = axios.get("https://mock-api.driven.com.br/api/v4/uol/messages");
     //     promessa.then(enviarResposta);
     // },3000);
-    // console.log(enviarResposta)
+    console.log(enviarResposta);
 }
 
-function deuRuim(){
-    alert("ERRO" + erro.response.status )
+        // -----BONUS -> LISTA DE PARTICIPANTES ONLINE -------
+
+let promessaentrar;
+let pessoason;
+let icones;
+
+promessaentrar = axios.get("https://mock-api.driven.com.br/api/v4/uol/participants");
+promessaentrar.then(pessoasOnline);
+
+function pessoasOnline(nomes) {
+    pessoason = nomes.data;
+    for(let x=0; x < pessoason.length; x++){
+        icones = document.querySelector(".pessoason");
+        icones.innerHTML +=`
+        <div class="todos">
+            <div class="esquerdadomenu">
+            <ion-icon class="person-circle-icon" name="person-circle"></ion-icon>
+            <div class="nomesmenu">${pessoason[x].name}</div>
+            </div>
+            <ion-icon class="checkmark-outline-icon" name="checkmark-outline"></ion-icon>
+        </div>`;
+    }
+    recarregarPessoasOn();
 }
 
+function recarregarPessoasOn(){  
+    setTimeout(() => {
+        icones.innerHTML="";
+        promessaentrar = axios.get("https://mock-api.driven.com.br/api/v4/uol/participants");
+        promessaentrar.then(pessoasOnline);
+    },10000);
+}
