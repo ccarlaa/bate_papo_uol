@@ -16,7 +16,7 @@ body{
     }
 
     .opaco {
-        height: 100vh;
+        height: 100%;
         width: calc(100vw - 300px);
         position: absolute;
         z-index: 2;
@@ -98,10 +98,47 @@ body{
         padding-bottom: 10px;
     }
 
+    .mensagensrecebidasmessage {
+        background-color: white;
+        width: 100vw;
+        height: auto;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 16px;
+        letter-spacing: 0em;
+        text-align: left;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        flex-wrap: wrap;
+        padding-left: 7px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    .mensagensrecebidasreservada{
+        background-color: #FFDEDE;
+        width: 100vw;
+        height: auto;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 16px;
+        letter-spacing: 0em;
+        text-align: left;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        flex-wrap: wrap;
+        padding-left: 7px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
     .tamanhodamsg {
         width: 97vw;
         height: auto;
-        background-color: #DCDCDC;
         display: flex;
         align-items: flex-start;
         flex-wrap: wrap;
