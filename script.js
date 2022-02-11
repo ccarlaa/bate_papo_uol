@@ -58,6 +58,43 @@ function recarregarChat(){
     console.log(enviarResposta);
 }
 
+// ----------ENTRADA NA SALA ----------
+
+let nome = prompt("Digite seu nome para entrar no chat:");
+let mensagem;
+let promessarequisicao;
+let entrarnasala;
+
+entrarnasala = axios.post("https://mock-api.driven.com.br/api/v4/uol/participants", 
+{
+    name: "nome"
+}
+)
+
+entrarnasala.catch(deuRuim)
+
+function deuRuim(){ 
+    nome = prompt("Digite seu nome para entrar no chat:");
+}
+
+setTimeout(() => {  //Envia o nome para o servidor a cada 5s
+    entrarnasala = axios.post("https://mock-api.driven.com.br/api/v4/uol/participants",
+    {
+        name: "nome"
+    }
+    )},5000);
+
+function enviarMensagem() {
+    mensagem = document.querySelector(".enviarmsg").value;
+    promessarequisicao = axios.post("https://mock-api.driven.com.br/api/v4/uol/messages",
+    {
+        from: "nome",
+        to: "Todos",
+        text: "mensagem",
+        type: "message"
+    })
+    console.log(promessarequisicao)
+}
         // -----BONUS -> LISTA DE PARTICIPANTES ONLINE -------
 
 let promessaentrar;
