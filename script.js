@@ -16,6 +16,44 @@ function abrirMenu() {
     document.documentElement.style.overflow = 'hidden';
 }
 
+// ----------ENTRADA NA SALA ----------
+
+let nome = prompt("Digite seu nome para entrar no chat:");
+let mensagem;
+let promessarequisicao;
+let entrarnasala;
+
+entrarnasala = axios.post("https://mock-api.driven.com.br/api/v4/uol/participants", 
+{
+    name: "nome"
+}
+)
+console.log(entrarnasala)
+
+entrarnasala.catch(deuRuim)
+
+function deuRuim(){ 
+    nome = prompt("Digite seu nome para entrar no chat:");
+}
+
+setTimeout(() => {  //Envia o nome para o servidor a cada 5s
+    entrarnasala = axios.post("https://mock-api.driven.com.br/api/v4/uol/participants",
+    {
+        name: "nome"
+    }
+    )},5000);
+
+function enviarMensagem() {
+    mensagem = document.querySelector(".enviarmsg").value;
+    promessarequisicao = axios.post("https://mock-api.driven.com.br/api/v4/uol/messages",
+    {
+        from: "nome",
+        to: "Todos",
+        text: "mensagem",
+        type: "message"
+    })
+    console.log(promessarequisicao)
+}
 
 // --------- CARREGAR MSGS NO CHAT ---------
 
@@ -58,48 +96,15 @@ function recarregarChat(){
     console.log(enviarResposta);
 }
 
-// ----------ENTRADA NA SALA ----------
-
-let nome = prompt("Digite seu nome para entrar no chat:");
-let mensagem;
-let promessarequisicao;
-let entrarnasala;
-
-entrarnasala = axios.post("https://mock-api.driven.com.br/api/v4/uol/participants", 
-{
-    name: "nome"
-}
-)
-
-entrarnasala.catch(deuRuim)
-
-function deuRuim(){ 
-    nome = prompt("Digite seu nome para entrar no chat:");
-}
-
-setTimeout(() => {  //Envia o nome para o servidor a cada 5s
-    entrarnasala = axios.post("https://mock-api.driven.com.br/api/v4/uol/participants",
-    {
-        name: "nome"
-    }
-    )},5000);
-
-function enviarMensagem() {
-    mensagem = document.querySelector(".enviarmsg").value;
-    promessarequisicao = axios.post("https://mock-api.driven.com.br/api/v4/uol/messages",
-    {
-        from: "nome",
-        to: "Todos",
-        text: "mensagem",
-        type: "message"
-    })
-    console.log(promessarequisicao)
-}
         // -----BONUS -> LISTA DE PARTICIPANTES ONLINE -------
 
 let promessaentrar;
 let pessoason;
 let icones;
+let pessoamarcada;
+let icone;
+let primeiroicone;
+
 
 promessaentrar = axios.get("https://mock-api.driven.com.br/api/v4/uol/participants");
 promessaentrar.then(pessoasOnline);
@@ -109,12 +114,11 @@ function pessoasOnline(nomes) {
     for(let x=0; x < pessoason.length; x++){
         icones = document.querySelector(".pessoason");
         icones.innerHTML +=`
-        <div class="todos">
+        <div class="todos" onclick="addCheck(this)">
             <div class="esquerdadomenu">
             <ion-icon class="person-circle-icon" name="person-circle"></ion-icon>
             <div class="nomesmenu">${pessoason[x].name}</div>
             </div>
-            <ion-icon class="checkmark-outline-icon" name="checkmark-outline"></ion-icon>
         </div>`;
     }
     recarregarPessoasOn();
@@ -122,8 +126,28 @@ function pessoasOnline(nomes) {
 
 function recarregarPessoasOn(){  
     setTimeout(() => {
-        icones.innerHTML="";
+        icones.innerHTML=`
+        <div class="todos" onclick="addCheck(this)">
+            <div class="esquerdadomenu">
+            <ion-icon class="people-icon" name="people"></ion-icon>
+            <div class="nomesmenu">Todos</div>
+            </div>
+        </div>`;
         promessaentrar = axios.get("https://mock-api.driven.com.br/api/v4/uol/participants");
         promessaentrar.then(pessoasOnline);
     },10000);
+}
+
+function addCheck(div){
+    pessoamarcada = div;
+    if(!primeiroicone){
+        pessoamarcada.innerHTML += '<ion-icon class="checkmark-outline-icon" name="checkmark-outline"></ion-icon>';
+        primeiroicone="preenchido";
+        icone = document.querySelector(".checkmark-outline-icon");
+        return false
+    }
+    if(primeiroicone){
+        icone.parentNode.removeChild(icone);
+        primeiroicone = null ;
+    }
 }
