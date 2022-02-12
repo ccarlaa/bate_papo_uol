@@ -17,35 +17,50 @@ function abrirMenu() {
 }
 
 // ----------ENTRADA NA SALA ----------
-
-let nome = prompt("Digite seu nome para entrar no chat:");
+let nome
 let mensagem;
 let promessarequisicao;
 let entrarnasala;
 
-entrarnasala = axios.post("https://mock-api.driven.com.br/api/v4/uol/participants", 
-{
-    name: nome
-}
-).then( respostaDoServidor => {
-    console.log(respostaDoServidor)
-}).catch(deuRuim)
+function coletarNome(){
+    nome = document.querySelector(".nome").value;
+    console.log(nome)
+    if(nome){
+        document.getElementById("entrar").style.display="none"
+        document.getElementById("todapagina").style.display="block"
+        console.log(nome)
+        entrarNoChat()
 
-function deuRuim(){ 
-    nome = prompt("Digite seu nome para entrar no chat:");
-}
-
-while(!nome){
-    nome = prompt("Digite seu nome para entrar no chat:");
+    }
 }
 
-setInterval(() => {  //Envia o nome para o servidor a cada 5s
-    entrarnasala = axios.post("https://mock-api.driven.com.br/api/v4/uol/status",
+function entrarNoChat(){
+    entrar = axios.post("https://mock-api.driven.com.br/api/v4/uol/participants", 
     {
         name: nome
     }
     ).then(resposta => {console.log(resposta)}).catch(deuRuim)
-    },5000);
+    console.log(entrar)
+    manterConexao()
+}
+
+
+
+function deuRuim(){ 
+    alert("DEU RUIM")
+}
+
+function manterConexao(){
+    setInterval(() => {
+        entrarnasala = axios.post("https://mock-api.driven.com.br/api/v4/uol/status",
+        {
+            name: nome
+        }
+        ).then(resposta => {console.log(resposta)}).catch(deuRuim)
+        },5000);
+        console.log(entrarnasala)
+}
+
 
 
 function enviarMensagem() {
@@ -60,14 +75,13 @@ function enviarMensagem() {
     }).then(resposta => {
         promessa = axios.get("https://mock-api.driven.com.br/api/v4/uol/messages");
         promessa.then(enviarResposta);
-        console.log(resposta)})
+        document.getElementById("enviarmsg").value=''})
     .catch(deuRuim)
-        console.log(promessarequisicao)
 }
 
 // --------- CARREGAR MSGS NO CHAT ---------
 
-let promessa;
+let promessachat;
 let mensagens;
 
 promessachat = axios.get("https://mock-api.driven.com.br/api/v4/uol/messages");
@@ -110,7 +124,8 @@ function enviarResposta(resposta) {
             <div class="espaco"></div>`);
         }
     }
-    const elementoQueQueroQueApareca = document.querySelector('.mensagem99');
+    let tamanhodoarray = informacoes.length -1
+    let elementoQueQueroQueApareca = document.querySelector(`.mensagem${tamanhodoarray}`);
     elementoQueQueroQueApareca.scrollIntoView();
 }
 
@@ -159,3 +174,4 @@ setInterval(() => {
     promessaentrar = axios.get("https://mock-api.driven.com.br/api/v4/uol/participants");
     promessaentrar.then(pessoasOnline);
 },10000);
+
