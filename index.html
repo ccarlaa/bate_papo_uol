@@ -64,7 +64,7 @@
       </div>  
       <footer class="rodape">
           <textarea type="text" class="enviarmsg" id="enviarmsg" name="mensagem" placeholder="Escreva aqui..."></textarea>
-          <ion-icon class="paper-plane-outline" name="paper-plane-outline" onclick="enviarMensagem()"></ion-icon>
+          <ion-icon class="paper-plane-outline" id="submetermsg" name="paper-plane-outline" onclick="enviarMensagem()"></ion-icon>
       </footer> 
 
     </div>
@@ -73,7 +73,7 @@
       <img class="logopgprincipal" src="./image/logo.png">
       <input type="text" class="nome" name="mensagem" id="mensagem" placeholder="Insira um nome..."/>
       <div class="espaco"></div>
-      <button onclick="coletarNome()">Entrar</button>
+      <button onclick="coletarNome()" id="enviarnome">Entrar</button>
     </div>
 
   </body>

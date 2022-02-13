@@ -30,7 +30,6 @@ function coletarNome(){
         document.getElementById("todapagina").style.display="block"
         console.log(nome)
         entrarNoChat()
-
     }
 }
 
@@ -42,12 +41,7 @@ function entrarNoChat(){
     ).then(resposta => {console.log(resposta)}).catch(deuRuim)
     console.log(entrar)
     manterConexao()
-}
-
-
-
-function deuRuim(){ 
-    alert("DEU RUIM")
+    mensagensDoChat()
 }
 
 function manterConexao(){
@@ -57,15 +51,18 @@ function manterConexao(){
             name: nome
         }
         ).then(resposta => {console.log(resposta)}).catch(deuRuim)
-        },5000);
+    },5000);
         console.log(entrarnasala)
-}
-
-
-
-function enviarMensagem() {
-    mensagem = document.querySelector(".enviarmsg").value;
-    console.log(mensagem)
+    }
+    
+    function enviarMensagem() {
+        mensagem = document.querySelector(".enviarmsg").value;
+        console.log(mensagem)
+        if(mensagem){
+            enviarMsgServidor()
+        }
+    }
+function enviarMsgServidor(){
     promessarequisicao = axios.post("https://mock-api.driven.com.br/api/v4/uol/messages",
     {
         from: nome,
@@ -76,16 +73,36 @@ function enviarMensagem() {
         promessa = axios.get("https://mock-api.driven.com.br/api/v4/uol/messages");
         promessa.then(enviarResposta);
         document.getElementById("enviarmsg").value=''})
-    .catch(deuRuim)
-}
+        .catch(meterOPe)
+    }
+    
+    document.addEventListener("keypress", function(e) {
+        if(e.key === 'Enter') {
+            
+            let botaoum = document.querySelector("#submetermsg");
+            
+            botaoum.click();
+            
+        }
+    });
 
+function meterOPe() {
+    window.location.reload();
+}
+        
+function deuRuim(){ 
+    alert("DEU RUIM")
+}
+        
 // --------- CARREGAR MSGS NO CHAT ---------
 
 let promessachat;
 let mensagens;
 
-promessachat = axios.get("https://mock-api.driven.com.br/api/v4/uol/messages");
-promessachat.then(enviarResposta);
+function mensagensDoChat() {
+    promessachat = axios.get("https://mock-api.driven.com.br/api/v4/uol/messages");
+    promessachat.then(enviarResposta);
+}
 
 function enviarResposta(resposta) {
     mensagens.innerHTML=""
@@ -112,7 +129,7 @@ function enviarResposta(resposta) {
                 </div>
             </div>
             <div class="espaco"></div>`);
-        }else if (nome == informacoes.name){
+        }else if (informacoes[i].to == nome){
             mensagens.insertAdjacentHTML("beforeend",`
             <div class="mensagensrecebidasreservada mensagem${[i]}">
                 <div class="tamanhodamsg">
