@@ -1,8 +1,8 @@
 // -----BONUS -> FECHAR MENU-------
 
-let opaco
-let menuaberto
-let menufechado
+let opaco;
+let menuaberto;
+let menufechado;
 
 function fecharMenu(){
     menufechado = document.getElementById("menu").style.display="none";
@@ -17,19 +17,17 @@ function abrirMenu() {
 }
 
 // ----------ENTRADA NA SALA ----------
-let nome
+let nome;
 let mensagem;
 let promessarequisicao;
 let entrarnasala;
 
 function coletarNome(){
     nome = document.querySelector(".nome").value;
-    console.log(nome)
     if(nome){
-        document.getElementById("entrar").style.display="none"
-        document.getElementById("todapagina").style.display="block"
-        console.log(nome)
-        entrarNoChat()
+        document.getElementById("entrar").style.display="none";
+        document.getElementById("todapagina").style.display="block";
+        entrarNoChat();
     }
 }
 
@@ -38,8 +36,7 @@ function entrarNoChat(){
     {
         name: nome
     }
-    ).then(resposta => {console.log(resposta)}).catch(deuRuim)
-    console.log(entrar)
+    ).then(resposta => {console.log(resposta)}).catch(deuRuim);
     manterConexao()
     mensagensDoChat()
 }
@@ -50,18 +47,17 @@ function manterConexao(){
         {
             name: nome
         }
-        ).then(resposta => {console.log(resposta)}).catch(deuRuim)
+        ).then(resposta => {console.log(resposta)}).catch(deuRuim);
     },5000);
-        console.log(entrarnasala)
-    }
+}
     
-    function enviarMensagem() {
-        mensagem = document.querySelector(".enviarmsg").value;
-        console.log(mensagem)
-        if(mensagem){
-            enviarMsgServidor()
-        }
+function enviarMensagem() {
+    mensagem = document.querySelector(".enviarmsg").value;
+    if(mensagem){
+        enviarMsgServidor();
     }
+}
+
 function enviarMsgServidor(){
     promessarequisicao = axios.post("https://mock-api.driven.com.br/api/v4/uol/messages",
     {
@@ -72,19 +68,15 @@ function enviarMsgServidor(){
     }).then(resposta => {
         promessa = axios.get("https://mock-api.driven.com.br/api/v4/uol/messages");
         promessa.then(enviarResposta);
-        document.getElementById("enviarmsg").value=''})
-        .catch(meterOPe)
-    }
+        document.getElementById("enviarmsg").value='';}).catch(meterOPe);
+}
     
-    document.addEventListener("keypress", function(e) {
-        if(e.key === 'Enter') {
-            
-            let botaoum = document.querySelector("#submetermsg");
-            
-            botaoum.click();
-            
-        }
-    });
+document.addEventListener("keypress", function(e) {
+    if(e.key === 'Enter') {
+        let botaoum = document.querySelector("#submetermsg");
+        botaoum.click();  
+    }
+});
 
 function meterOPe() {
     window.location.reload();
@@ -105,9 +97,9 @@ function mensagensDoChat() {
 }
 
 function enviarResposta(resposta) {
-    mensagens.innerHTML=""
+    mensagens.innerHTML="";
     let informacoes = resposta.data;
-    mensagens = document.getElementById("chat")
+    mensagens = document.getElementById("chat");
     for(let i = 0 ; i < informacoes.length ; i++){
         if(informacoes[i].type == "status"){
             mensagens.insertAdjacentHTML("beforeend",
