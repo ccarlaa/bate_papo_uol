@@ -1,17 +1,17 @@
 // -----BONUS -> FECHAR MENU-------
 
 let opaco;
-let menuaberto;
-let menufechado;
+let menuAberto;
+let menuFechado;
 
 function fecharMenu(){
-    menufechado = document.getElementById("menu").style.display="none";
+    menuFechado = document.getElementById("menu").style.display="none";
     opaco = document.getElementById("opaco").style.display="none";
     document.documentElement.style.overflow = "none";
 }
 
 function abrirMenu() {
-    menuaberto = document.getElementById("menu").style.display="flex";
+    menuAberto = document.getElementById("menu").style.display="flex";
     opaco = document.getElementById("opaco").style.display="flex";
     document.documentElement.style.overflow = 'hidden';
 }
@@ -19,8 +19,8 @@ function abrirMenu() {
 // ----------ENTRADA NA SALA ----------
 let nome;
 let mensagem;
-let promessarequisicao;
-let entrarnasala;
+let promessaRequisicao;
+let entrarNaSala;
 
 function coletarNome(){
     nome = document.querySelector(".nome").value;
@@ -43,7 +43,7 @@ function entrarNoChat(){
 
 function manterConexao(){
     setInterval(() => {
-        entrarnasala = axios.post("https://mock-api.driven.com.br/api/v4/uol/status",
+        entrarNaSala = axios.post("https://mock-api.driven.com.br/api/v4/uol/status",
         {
             name: nome
         }
@@ -59,7 +59,7 @@ function enviarMensagem() {
 }
 
 function enviarMsgServidor(){
-    promessarequisicao = axios.post("https://mock-api.driven.com.br/api/v4/uol/messages",
+    promessaRequisicao = axios.post("https://mock-api.driven.com.br/api/v4/uol/messages",
     {
         from: nome,
         to: 'Todos',
@@ -73,8 +73,8 @@ function enviarMsgServidor(){
     
 document.addEventListener("keypress", function(e) {
     if(e.key === 'Enter') {
-        let botaoum = document.querySelector("#submetermsg");
-        botaoum.click();  
+        let botaoUm = document.querySelector("#submetermsg");
+        botaoUm.click();  
     }
 });
 
@@ -88,12 +88,12 @@ function deuRuim(){
         
 // --------- CARREGAR MSGS NO CHAT ---------
 
-let promessachat;
+let promessaChat;
 let mensagens;
 
 function mensagensDoChat() {
-    promessachat = axios.get("https://mock-api.driven.com.br/api/v4/uol/messages");
-    promessachat.then(enviarResposta);
+    promessaChat = axios.get("https://mock-api.driven.com.br/api/v4/uol/messages");
+    promessaChat.then(enviarResposta);
 }
 
 function enviarResposta(resposta) {
@@ -133,8 +133,8 @@ function enviarResposta(resposta) {
             <div class="espaco"></div>`);
         }
     }
-    let tamanhodoarray = informacoes.length -1
-    let elementoQueQueroQueApareca = document.querySelector(`.mensagem${tamanhodoarray}`);
+    let tamanhodoArray = informacoes.length -1
+    let elementoQueQueroQueApareca = document.querySelector(`.mensagem${tamanhodoArray}`);
     elementoQueQueroQueApareca.scrollIntoView();
 }
 
@@ -147,25 +147,23 @@ console.log(enviarResposta);
 
         // -----BONUS -> LISTA DE PARTICIPANTES ONLINE -------
 
-let promessaentrar;
-let pessoason;
+let promessaEntrar;
+let pessoasOn;
 let icones;
-let pessoamarcada;
 let icone;
-let primeiroicone;
 
-promessaentrar = axios.get("https://mock-api.driven.com.br/api/v4/uol/participants");
-promessaentrar.then(pessoasOnline);
+promessaEntrar = axios.get("https://mock-api.driven.com.br/api/v4/uol/participants");
+promessaEntrar.then(pessoasOnline);
 
 function pessoasOnline(nomes) {
-    pessoason = nomes.data;
-    for(let x=0; x < pessoason.length; x++){
+    pessoasOn = nomes.data;
+    for(let x=0; x < pessoasOn.length; x++){
         icones = document.querySelector(".pessoason");
         icones.innerHTML +=`
         <div class="todos" onclick="addCheck(this)">
             <div class="esquerdadomenu">
             <ion-icon class="person-circle-icon" name="person-circle"></ion-icon>
-            <div class="nomesmenu">${pessoason[x].name}</div>
+            <div class="nomesmenu">${pessoasOn[x].name}</div>
             </div>
         </div>`;
     }
