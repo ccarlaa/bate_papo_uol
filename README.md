@@ -1,11 +1,35 @@
-## ⚡️ Bate Papo UOL
+[**English**](#envelope_with_arrow-bate-papo-uol)
+[**Português**](#-sobre)
 
-<p>Aplicação front-end que visa simular um bate papo.</p>
+## :envelope_with_arrow: Bate Papo UOL
 
-<img src=image/batePapoUol.gif  width="300" />
+<p>Front-end application aiming to simulate a chat.</p>
+
+<img src=image/batePapoUol.gif width="300" />
 
 [Bate Papo UOL](https://ccarlaa.github.io/bate_papo_uol/)
 
+## 📝 About
+
+<p>The application was created to learn about the functioning of requests to an API. The following technologies were used: HTML, CSS, and Javascript.</p>
+
+[![My Skills](https://skills.thijs.gg/icons?i=html,css,javascript&theme=light)](https://skills.thijs.gg)
+
+## 📁 Project Access
+
+You can [access the project's source code](https://github.com/ccarlaa/bate_papo_uol) or [download it](https://github.com/ccarlaa/bate_papo_uol/archive/refs/heads/main.zip).
+
+## 🛠️ Open and Run the Project
+
+After downloading the project, you can open it with Visual Studio Code. To do this, on the launcher screen, click:
+
+- File > Open Folder
+- Locate the project's location and select it (If the project is downloaded as a zip file, it needs to be extracted before locating it.)
+- Finally, click Open
+
+To run the project, you can use the [Live Server](https://github.com/ritwickdey/vscode-live-server).
+
+***
 ## 📝 Sobre
 
 <p>A aplicação foi feita com o objetivo de aprender sobre o funcionamento de requisições para uma API. Foram utilizadas as seguintes
